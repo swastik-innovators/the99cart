@@ -1,20 +1,26 @@
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import Products from './components/Products';
-import Footer from './components/Footer';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import MainLayout from './layouts/MainLayout';
+import HomePage from './pages/HomePage';
+import AboutPage from './pages/AboutPage';
 
 function App() {
   return (
-    <>
-      {/* Background Elements */}
-      <div className="glow glow-1"></div>
-      <div className="glow glow-2"></div>
-
-      <Navbar />
-      <Hero />
-      <Products />
-      <Footer />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          {/* Default Index Route (Home) */}
+          <Route index element={<HomePage />} />
+          
+          {/* Example of adding a new page */}
+          <Route path="about" element={<AboutPage />} />
+          
+          {/* Future pages go here */}
+          {/* <Route path="products" element={<ProductsPage />} /> */}
+          {/* <Route path="contact" element={<ContactPage />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

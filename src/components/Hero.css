@@ -1,0 +1,308 @@
+/* Hero.css */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    padding-top: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-color);
+    overflow: hidden;
+}
+
+.threejs-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.threejs-canvas {
+    width: 100%;
+    height: 100%;
+    filter: blur(40px) saturate(1.5);
+}
+
+.hero-content-wrapper {
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 24px;
+    text-align: center;
+}
+
+/* Badge Pill */
+.hero-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 16px 6px 6px;
+    background: var(--surface-light);
+    border: 1px solid var(--surface-border);
+    border-radius: 100px;
+    backdrop-filter: blur(10px);
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-badge-pill:hover {
+    background: var(--surface-border);
+}
+
+.badge-new {
+    background: #3B82F6;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* Typography */
+.hero-main-title {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+.hero-main-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 650px;
+    margin-bottom: 32px;
+}
+
+/* Tools Row */
+.hero-tools-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 40px;
+}
+
+.tool-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.tool-item:hover {
+    color: var(--text-primary);
+}
+
+.tool-item svg {
+    color: var(--accent-1);
+}
+
+/* Action Button */
+.hero-actions {
+    margin-bottom: 60px;
+}
+
+.btn-get-started {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: #4f46e5;
+    color: white;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(79, 70, 229, 0.4);
+}
+
+.btn-get-started:hover {
+    background: #4338ca;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
+}
+
+/* Product Grid */
+.hero-product-grid-wrapper {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    padding: 0 0 60px 0;
+    /* Edge fade effect */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+}
+
+.hero-product-grid {
+    display: grid;
+    /* Generate enough columns so it overflows symmetrically */
+    grid-template-columns: repeat(6, 300px);
+    grid-auto-rows: 220px;
+    gap: 20px;
+    width: max-content;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.product-card-wrap {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--surface-color);
+    cursor: pointer;
+    border: 1px solid var(--surface-border);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+}
+
+.product-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.product-card-wrap:hover .product-media {
+    transform: scale(1.05);
+}
+
+.span-col-2 {
+    grid-column: span 2;
+}
+
+.span-col-3 {
+    grid-column: span 3;
+}
+
+.span-row-2 {
+    grid-row: span 2;
+}
+
+.product-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-card-wrap:hover .product-overlay {
+    opacity: 1;
+}
+
+.overlay-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-view, .btn-buy {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-view {
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--text-primary);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+}
+
+.btn-view:hover {
+    background: rgba(255, 255, 255, 1);
+}
+
+.btn-buy {
+    background: white;
+    color: #0d0d0f;
+}
+
+.btn-buy:hover {
+    background: #e2e8f0;
+}
+
+.btn-view:active, .btn-buy:active {
+    transform: scale(0.95);
+}
+
+.product-info-overlay {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    right: 24px;
+    text-align: left;
+    pointer-events: none;
+}
+
+.product-title {
+    color: white;
+    font-weight: 600;
+    font-size: 1.15rem;
+    margin: 0 0 4px 0;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+.product-price {
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+
+/* Responsive Grid */
+@media (max-width: 1024px) {
+    .hero-product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .span-col-2 {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-main-title {
+        font-size: 2.5rem;
+    }
+    .hero-product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 200px;
+    }
+    .span-row-2 {
+        grid-row: span 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-product-grid {
+        grid-template-columns: 1fr;
+    }
+}

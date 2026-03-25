@@ -1,36 +1,5 @@
 import React from 'react';
-
-const productsData = [
-    {
-        id: 1,
-        title: "Ultimate Graphic Bundle",
-        description: "Over 500+ premium graphics, vectors, and icons for your next big project.",
-        price: "₹499",
-        image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop",
-        badge: "Best Seller"
-    },
-    {
-        id: 2,
-        title: "Modern UI Kit Pro",
-        description: "A complete dashboard and landing page UI kit with 200+ components.",
-        price: "₹799",
-        image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-        id: 3,
-        title: "Social Media Templates",
-        description: "100+ stunning, ready-to-use templates for Instagram, Twitter & LinkedIn.",
-        price: "₹299",
-        image: "https://images.unsplash.com/photo-1626908013351-800ddd734b8a?q=80&w=1000&auto=format&fit=crop"
-    },
-    {
-        id: 4,
-        title: "Startup Presentation Deck",
-        description: "Win over investors with this highly converting, professionally designed deck.",
-        price: "₹399",
-        image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=1000&auto=format&fit=crop"
-    }
-];
+import { productsData } from '../data/products';
 
 const Products = () => {
     const handleBuyClick = (productName) => {

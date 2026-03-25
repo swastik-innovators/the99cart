@@ -4,21 +4,21 @@
 */
 
 :root {
-    --bg-color: #050505;
-    --surface-color: #111113;
-    --surface-light: #1A1A1D;
-    --surface-border: #2A2A30;
+    --bg-color: #FAFAFA;
+    --surface-color: #FFFFFF;
+    --surface-light: #F4F4F5;
+    --surface-border: #E4E4E7;
     
-    --text-primary: #FFFFFF;
-    --text-secondary: #A1A1AA;
+    --text-primary: #09090B;
+    --text-secondary: #52525B;
     
     --accent-1: #4F46E5; /* Indigo */
-    --accent-2: #EC4899; /* Pink */
-    --accent-3: #8B5CF6; /* Violet */
+    --accent-2: #DB2777; /* Deep Pink */
+    --accent-3: #7C3AED; /* Violet */
     
     --gradient-primary: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-    --gradient-hover: linear-gradient(135deg, #4338CA, #DB2777);
-    --gradient-text: linear-gradient(to right, #8B5CF6, #F472B6);
+    --gradient-hover: linear-gradient(135deg, #4338CA, #BE185D);
+    --gradient-text: linear-gradient(to right, #4F46E5, #DB2777);
     
     --border-radius: 16px;
     --border-radius-lg: 24px;
@@ -92,15 +92,32 @@ body {
     width: 100%;
     padding: 20px 0;
     z-index: 1000;
-    background: rgba(5, 5, 5, 0.6);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     transition: var(--transition);
 }
 
+.navbar-glossy-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: rgba(255, 255, 255, 0.5); /* light glass */
+    -webkit-backdrop-filter: url(#glossy-filter) blur(12px);
+    backdrop-filter: url(#glossy-filter) blur(12px);
+    opacity: 0.8;
+    transition: all 0.5s ease;
+}
+
+.navbar.scrolled .navbar-glossy-backdrop {
+    background: rgba(255, 255, 255, 0.85); /* Frosty white */
+    opacity: 1;
+}
+
 .navbar.scrolled {
-    background: rgba(5, 5, 5, 0.85);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    padding: 16px 0;
 }
 
 .nav-content {
@@ -276,8 +293,8 @@ body {
 
 .product-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    border-color: var(--accent-1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .product-image-wrapper {
@@ -302,14 +319,15 @@ body {
     position: absolute;
     top: 16px;
     right: 16px;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(8px);
     padding: 6px 12px;
     border-radius: 100px;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: #FBBF24;
-    border: 1px solid rgba(251, 191, 36, 0.3);
+    font-weight: 700;
+    color: #F59E0B;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .product-info {
@@ -355,7 +373,7 @@ body {
     align-items: center;
     gap: 8px;
     padding: 10px 20px;
-    background: #25D366; /* WhatsApp Green */
+    background: #128C7E; /* Deeper WhatsApp Green for light mode contrast */
     color: white;
     text-decoration: none;
     border-radius: 100px;
@@ -434,4 +452,248 @@ body {
     .footer-content {
         flex-direction: column;
     }
+}
+
+/* Global Search Modal Styles */
+.nav-search-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-search-btn:hover {
+    color: var(--text-primary);
+}
+
+.search-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.4); /* subtle light tint overlay */
+    backdrop-filter: blur(12px); /* nice blur for light mode */
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 10vh;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.search-modal-content {
+    width: 100%;
+    max-width: 700px;
+    background: var(--surface-color);
+    border: 1px solid var(--surface-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.search-modal-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--surface-border);
+    background: var(--surface-light);
+}
+
+.search-modal-icon {
+    color: var(--text-secondary);
+    margin-right: 16px;
+}
+
+.search-modal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    outline: none;
+    font-family: inherit;
+}
+
+.search-modal-input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.search-modal-close {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    margin-left: 16px;
+    transition: var(--transition);
+}
+
+.search-modal-close:hover {
+    color: var(--accent-2);
+}
+
+.search-modal-results {
+    /* 6 results limit while scrolling */
+    max-height: calc(85px * 6);
+    overflow-y: auto;
+    padding: 12px;
+}
+
+/* Custom scrollbar for results */
+.search-modal-results::-webkit-scrollbar {
+    width: 8px;
+}
+
+.search-modal-results::-webkit-scrollbar-track {
+    background: var(--surface-color);
+}
+
+.search-modal-results::-webkit-scrollbar-thumb {
+    background: var(--surface-border);
+    border-radius: 10px;
+}
+
+.search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-radius: 12px;
+    transition: background 0.2s ease;
+    cursor: pointer;
+}
+
+.search-result-item:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.search-result-media {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-right: 16px;
+    flex-shrink: 0;
+    background: var(--surface-light);
+}
+
+.search-result-media img,
+.search-result-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.search-result-info {
+    flex: 1;
+}
+
+.search-result-info h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.search-result-info p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.search-result-buy {
+    background: var(--text-primary);
+    color: var(--bg-color);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateX(10px);
+}
+
+.search-result-item:hover .search-result-buy {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.search-result-buy:hover {
+    background: #e2e8f0;
+}
+
+.search-no-results {
+    padding: 32px;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+/* Dark Mode Overrides */
+.dark {
+    --bg-color: #0b0b0e;
+    --surface-color: #111113;
+    --surface-light: #1A1A1D;
+    --surface-border: #2A2A30;
+    
+    --text-primary: #FFFFFF;
+    --text-secondary: #94a3b8;
+    
+    --accent-1: #4F46E5; 
+    --accent-2: #EC4899; 
+    --accent-3: #8B5CF6; 
+}
+
+.dark .navbar-glossy-backdrop {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.dark .navbar.scrolled .navbar-glossy-backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.dark .search-modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.dark .search-modal-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.dark .search-result-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .product-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.dark .product-badge {
+    background: rgba(0, 0, 0, 0.7);
+    color: #FBBF24;
+    border-color: rgba(251, 191, 36, 0.3);
+}
+
+.dark .btn-buy, 
+.dark .search-result-buy {
+    background: #25D366;
+    color: white;
 }
