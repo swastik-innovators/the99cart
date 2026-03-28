@@ -115,7 +115,7 @@ const Hero = () => {
                 </motion.div>
             </div>
 
-            {/* Full-size wrapper with side fade effects */}
+            {/* Original Full-size wrapper with side fade effects (Grid below featured) */}
             <motion.div 
                 className="hero-product-grid-wrapper"
                 initial={{ opacity: 0, y: 30 }}
@@ -123,8 +123,8 @@ const Hero = () => {
                 transition={{ duration: 0.8, delay: 0.5 }}
             >
                 <div className="hero-product-grid">
-                    {productsData.map((product, index) => (
-                        <div key={product.id} className={`product-card-wrap ${product.gridClass}`}>
+                    {productsData.map((product) => (
+                        <div key={`grid-${product.id}`} className={`product-card-wrap ${product.gridClass}`}>
                             {product.type === 'video' ? (
                                 <video src={product.videoUrl} autoPlay loop muted playsInline className="product-media" />
                             ) : (
@@ -153,6 +153,49 @@ const Hero = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </motion.div>
+
+            {/* Featured Products Section with Gradient Animation */}
+            <motion.div 
+                className="featured-section-wrapper"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+            >
+                <div className="featured-section-header">
+                    <h2>Featured Tailwind Products</h2>
+                    <a href="#add" className="add-featured-link">Add Featured Product &rarr;</a>
+                </div>
+                
+                <div className="featured-gradient-box">
+                    <div className="featured-box-content">
+                        {productsData.slice(0, 4).map((product) => (
+                            <div key={product.id} className="featured-card">
+                                <div className="featured-card-img-wrapper">
+                                    {product.type === 'video' ? (
+                                        <video src={product.videoUrl} autoPlay loop muted playsInline className="featured-card-media" />
+                                    ) : (
+                                        <img src={product.image} alt={product.title} loading="lazy" className="featured-card-media" />
+                                    )}
+                                    {product.badge && <div className="featured-badge">{product.badge}</div>}
+                                </div>
+                                <div className="featured-card-info">
+                                    <h3>{product.title}</h3>
+                                    <p className="featured-author">By The99Cart</p>
+                                    <p className="featured-desc">{product.description}</p>
+                                    <div className="featured-card-actions">
+                                        <button className="btn-view" onClick={handleViewClick}>
+                                            <Eye size={14} /> View
+                                        </button>
+                                        <button className="btn-buy" onClick={(e) => handleBuyClick(e, product.title)}>
+                                            <ShoppingCart size={14} /> Buy
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </motion.div>
         </section>

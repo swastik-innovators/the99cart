@@ -140,23 +140,221 @@
     box-shadow: 0 8px 25px rgba(79, 70, 229, 0.6);
 }
 
-/* Product Grid */
+/* Featured Products Section */
+.featured-section-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px 80px 24px;
+    position: relative;
+    z-index: 5;
+}
+
+.featured-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.featured-section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.add-featured-link {
+    color: #4f46e5;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+}
+
+.add-featured-link:hover {
+    color: #4338ca;
+}
+
+.featured-gradient-box {
+    position: relative;
+    border-radius: 16px;
+    padding: 2px; /* Border thickness */
+    background: linear-gradient(90deg, #4f46e5, #db2777, #7c3aed, #4f46e5);
+    background-size: 300% 300%;
+    animation: gradient-pan 4s linear infinite;
+}
+
+@keyframes gradient-pan {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.featured-box-content {
+    background: var(--surface-light);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    /* hide scrollbar */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.featured-box-content::-webkit-scrollbar {
+    display: none;
+}
+
+.featured-card {
+    min-width: 260px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-color);
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+.featured-card-img-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--bg-color);
+}
+
+.featured-card-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.featured-card:hover .featured-card-media {
+    transform: scale(1.05);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.featured-card-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.featured-card-info h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.featured-author {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.featured-desc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 20px;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.featured-card-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.featured-card-actions button {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.featured-card-actions .btn-view {
+    background: var(--surface-light);
+    border: 1px solid var(--surface-border);
+    color: var(--text-primary);
+}
+
+.featured-card-actions .btn-view:hover {
+    background: var(--surface-border);
+}
+
+.featured-card-actions .btn-buy {
+    background: var(--text-primary);
+    color: var(--bg-color);
+}
+
+.featured-card-actions .btn-buy:hover {
+    background: var(--text-secondary);
+}
+
+.featured-card-actions button:active {
+    transform: scale(0.95);
+}
+
+/* Original Product Grid (Re-added) */
 .hero-product-grid-wrapper {
     position: relative;
     width: 100vw;
     margin-left: calc(-50vw + 50%);
     overflow: hidden;
     padding: 0 0 60px 0;
-    /* Edge fade effect */
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
     mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
 }
 
 .hero-product-grid {
     display: grid;
-    /* Generate enough columns so it overflows symmetrically */
     grid-template-columns: repeat(6, 300px);
-    grid-auto-rows: 220px;
+    grid-auto-rows: 240px;
+    grid-auto-flow: dense; /* Crucial: fills any empty holes in the grid */
     gap: 20px;
     width: max-content;
     margin: 0 auto;
@@ -169,19 +367,19 @@
     overflow: hidden;
     background: var(--surface-color);
     cursor: pointer;
-    border: 1px solid var(--surface-border);
-    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
 }
 
 .product-media {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .product-card-wrap:hover .product-media {
-    transform: scale(1.05);
+    transform: scale(1.05); /* Slightly less dramatic for cards with gaps */
 }
 
 .span-col-2 {
@@ -217,7 +415,7 @@
     gap: 12px;
 }
 
-.btn-view, .btn-buy {
+.product-overlay .btn-view, .product-overlay .btn-buy {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -230,56 +428,62 @@
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
-.btn-view {
+.product-overlay .btn-view {
     background: rgba(255, 255, 255, 0.85);
     color: var(--text-primary);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.9);
 }
 
-.btn-view:hover {
+.product-overlay .btn-view:hover {
     background: rgba(255, 255, 255, 1);
 }
 
-.btn-buy {
+.product-overlay .btn-buy {
     background: white;
     color: #0d0d0f;
 }
 
-.btn-buy:hover {
+.product-overlay .btn-buy:hover {
     background: #e2e8f0;
 }
 
-.btn-view:active, .btn-buy:active {
+.product-overlay .btn-view:active, .product-overlay .btn-buy:active {
     transform: scale(0.95);
 }
 
 .product-info-overlay {
     position: absolute;
-    bottom: 24px;
-    left: 24px;
-    right: 24px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 40px 24px 24px 24px;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
     text-align: left;
     pointer-events: none;
+    z-index: 2;
 }
 
 .product-title {
     color: white;
     font-weight: 600;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     margin: 0 0 4px 0;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .product-price {
-    color: #e2e8f0;
-    font-size: 0.95rem;
+    color: #cbd5e1; /* Slightly muted white for premium feel */
+    font-size: 0.9rem;
     font-weight: 500;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
-/* Responsive Grid */
+/* Responsive */
 @media (max-width: 1024px) {
+    .featured-box-content {
+        flex-wrap: nowrap;
+    }
     .hero-product-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -291,6 +495,12 @@
 @media (max-width: 768px) {
     .hero-main-title {
         font-size: 2.5rem;
+    }
+    .featured-section-wrapper {
+        padding: 0 16px 60px 16px;
+    }
+    .featured-card {
+        min-width: 260px;
     }
     .hero-product-grid {
         grid-template-columns: repeat(2, 1fr);
