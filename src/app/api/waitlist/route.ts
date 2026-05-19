@@ -34,20 +34,8 @@ export async function POST(request: Request) {
     }
 
     // 3. SMTP Server Setup (Gmail Direct Connection)
-    const smtpUser = process.env.SMTP_USER || "pytank101@gmail.com";
-    const smtpPass = process.env.SMTP_PASS;
-
-    // Check if App Password is set up
-    if (!smtpPass) {
-      console.warn("⚠️ SMTP_PASS is missing in environment variables. Falling back to debug mode.");
-      return NextResponse.json(
-        { 
-          success: false, 
-          message: "Database/SMTP setup is incomplete. Please add SMTP_PASS to your .env.local file to receive live emails." 
-        },
-        { status: 500 }
-      );
-    }
+    const smtpUser = "pytank101@gmail.com";
+    const smtpPass = "komx slbv nyba lmaq";
 
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
