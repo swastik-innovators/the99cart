@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/* Enable custom theme state for class-based Dark Mode in Tailwind CSS v4 */
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #1E293B; /* Soft slate-800, much more premium than harsh black */
+}
+
+.dark {
+  --background: #0B0B14;
+  --foreground: #F1F5F9; /* Clean slate-100, highly readable */
+}
+
+@theme {
+  --variant-dark: class;
+  --font-sans: var(--font-outfit), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-outfit), system-ui, sans-serif;
+  
+  --color-primary: #6D47FF;
+  --color-secondary: #DD00FF;
+  --color-dark: #101828;
+  --color-dark-bg: #0B0B14;
+  
+  --color-text-light: #F8FAFC;
+  --color-text-dark: #1E293B;
+}
+
+/* Force Outfit on all elements to ensure 100% font coverage and premium readability */
+*, *::before, *::after, input, select, textarea, button {
+  font-family: var(--font-outfit), system-ui, -apple-system, sans-serif !important;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1), color 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+/* Custom premium glows strictly limited to brand colors */
+.glow-primary {
+  box-shadow: 0 10px 40px rgba(109, 71, 255, 0.08);
+}
+
+.glow-secondary {
+  box-shadow: 0 10px 40px rgba(221, 0, 255, 0.08);
+}
+
+.glow-cta {
+  box-shadow: 0 4px 20px rgba(109, 71, 255, 0.25);
+}
+
+.glow-cta-hover {
+  box-shadow: 0 4px 30px rgba(221, 0, 255, 0.45);
+}
+
+/* Smooth custom scrollbars using primary accent colors */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(109, 71, 255, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6D47FF;
+}
